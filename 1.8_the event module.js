@@ -1,6 +1,17 @@
 var events = require('events');
 var util = require('util');
 
+// EventEmitter is a constructor
+var myEmitter = new events.EventEmitter();
+
+myEmitter.on('someEvent', function(mssg){
+	console.log(mssg);
+});
+// first arg is the name of event, second arg is the parameter we are passing (mssg)
+myEmitter.emit('someEvent', 'the event was emitted');
+
+
+/////////////////////////////////////////////////////////////
 // create new object contructor
 var Person = function(name){
 	this.name = name;
