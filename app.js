@@ -1,29 +1,23 @@
-var events = require('events');
-var util = require('util');
+// file system
+var fs = require('fs');
 
-// create new object contructor
-var Person = function(name){
-	this.name = name;
-};
+///// SYNC /////
 
-// any new Person inherit the EventEmitter
-util.inherits(Person, events.EventEmitter);
+/////  READING FILES ////////////////////////////////
+// this is a syncronous code which means it will read first before moving on
+// first arg is file to be read, second arg is the encoding type
+var readMe = fs.readFileSync('readme.txt', 'utf8');
 
-var james = new Person('james');
-var mary = new Person('mary');
-var ryu = new Person('ryu');
-var people = [james, mary, ryu];
+console.log(readMe);
 
-// wire up event listeners
-// cycles through each in array
-people.forEach(function(person){
-			// custom event
-	person.on('speak', function(mssg){
-		console.log(person.name + ' said: ' + mssg);
-	});
+/////  WRITING FILES ////////////////////////////////
+// first arg is where we want it written to, second arg is data to be written
+fs.writeFileSync('writeMe.txt', readMe); // writeMe file is created
+
+
+///// A-SYNC ///// - non-blocking code
+
+fs.readFile('readme.txt', 'utf8', function(err, data){
+	console.log(data);
+	fs.writeFile('writeMe.txt', data);
 });
-
-// call events
-
-james.emit('speak', 'hey dudes');
-ryu.emit('speak', 'I want a curry');
