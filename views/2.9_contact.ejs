@@ -30,9 +30,9 @@
 	<h1>Contact Us</h1>
 	<p>Contact the coolest cats on the web right here</p>
 
-	<form id="contact-form" method="POST" action="/contact">
+	<form id="contact-form">
 		<label for="who">Who do you want to contact?</label>
-					<!--name value is used to assign properties in url encoded POST-->
+											<!--pre populate form with data from request-->
 		<input type="text" name="who" value="<%= qs.person %>" />
 		<label for="department">Which department?</label>
 		<input type="text" name="department" value="<%= qs.dept %>" />
